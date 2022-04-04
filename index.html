@@ -13,7 +13,7 @@
 
        Name         : userjs-tool.html
        Project      : https://github.com/icpantsparti2/firefox-user.js-tool
-       Version      : 2022.04.02 (alpha/experimental)
+       Version      : 2022.04.02.2 (alpha/experimental)
        File         : https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/userjs-tool.html
        On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
        License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
@@ -3741,11 +3741,11 @@ function diff( o, n ) {
       if (filterType=="t") {
         // tags are already URI encoded
         textToAdd=textToAdd.replace(/^TAGS_/,"");
-        textToAdd="?t="+textToAdd;
+        textToAdd="t="+textToAdd;
       }
       else if (filterType=="s") {
         textToAdd=encodeURIComponent(textToAdd);
-        textToAdd="?s="+textToAdd;
+        textToAdd="s="+textToAdd;
       }
       else if (textToAdd) {
         textToAdd=encodeURIComponent(textToAdd);
@@ -3753,16 +3753,16 @@ function diff( o, n ) {
       
       if (getURLVariable("afmode")) {
         if (textToAdd) {
-          textToAdd=textToAdd.replace(/^\?/,"\?afmode="+(getURLVariable("afmode"))+"\&");
+          textToAdd=textToAdd.replace(/^/,"afmode="+(getURLVariable("afmode"))+"\&");
         }
         else {
-          textToAdd="?afmode="+(getURLVariable("afmode"));
+          textToAdd="afmode="+(getURLVariable("afmode"));
         }
       }
       // location.protocol + "//" + location.pathname + textToAdd;
       // https://stackoverflow.com/questions/824349/how-do-i-modify-the-url-without-reloading-the-page
       // location.search += textToAdd;
-      window.history.replaceState(null, document.title,textToAdd);
+      window.history.replaceState(null, document.title,"?"+textToAdd);
     }
 
     function userjsTableViewTagFilter(filter_tag="",filter_search="") {
@@ -7624,7 +7624,7 @@ an extension such as: uBlock Origin, uMatrix, NoScript.<br>
 <br>
 Interactive view, compare, and more for Firefox user.js (eg arkenfox user.js).<br>
 <br>
-Version&nbsp;&nbsp;&nbsp;: 2022.04.02 (alpha/experimental)<br>
+Version&nbsp;&nbsp;&nbsp;: 2022.04.02.2 (alpha/experimental)<br>
 
 Project&nbsp;&nbsp;&nbsp;:
 <a target="_blank" rel="external noopener noreferrer"
