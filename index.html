@@ -13,7 +13,7 @@
 
        Name         : userjs-tool.html
        Project      : https://github.com/icpantsparti2/firefox-user.js-tool
-       Version      : 2022.04.02.2 (alpha/experimental)
+       Version      : 2022.04.02.3 (alpha/experimental)
        File         : https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/userjs-tool.html
        On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
        License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
@@ -548,22 +548,22 @@
     .controls_arkenfox                { background-color: #161b22;
                                                color: #b3b3b3; }
     .controls_arkenfox:focus          { outline: 2px auto #FF0000; }
-    .controls_arkenfox:hover          { background-color: #f0c878;
+    .controls_arkenfox:hover          { background-color: #dcdc8c;
                                                color: #000000; }
     .borders_arkenfox           { /*box-shadow: 3px 3px 4px #808080;*/
                                     border: 1px solid #b3b3b3;
                      border-width: 1px 1px 1px 1px; }
     .view_area_arkenfox .pref                    { color: #ffffff; } /* section header */
-    .body_arkenfox a                             { color: #dcc18c; } /* prefname */
-    .view_area_arkenfox .false                   { color: #dc8c8c; }
-    .view_area_arkenfox .true                    { color: #8cdcc1; }
-    .view_area_arkenfox .integer                 { color: #c1dc8c; }
-    .view_area_arkenfox .string                  { color: #a78cdc; }
-    .view_area_arkenfox .http                    { color: #8ca7dc; } /* a http */
+    .body_arkenfox a                             { color: #b3b3b3; } /* prefname */
+    .view_area_arkenfox .false                   { color: #f07878; }
+    .view_area_arkenfox .true                    { color: #78f0c8; }
+    .view_area_arkenfox .integer                 { color: #c8f078; }
+    .view_area_arkenfox .string                  { color: #a078f0; }
+    .view_area_arkenfox .http                    { color: #78a0f0; } /* a http */
     .view_area_arkenfox .warn         { background-color: #ff4f4f;
                                                color: #FFFFFF; }
-    .view_area_arkenfox .hid                     { color: #8cc1dc; }
-    .view_area_arkenfox .ref                     { color: #8cdc8c; } /* id+desc */
+    .view_area_arkenfox .hid                     { color: #78c8f0; }
+    .view_area_arkenfox .ref                     { color: #78f078; } /* id+desc */
 
   </style>
 
@@ -3659,6 +3659,17 @@ function diff( o, n ) {
       }
     }
 
+    function userjsTableViewExpandCollapseAll() {
+      var b = document.getElementById("expand_collapse_button");
+      userjsTableViewCollapseAll();
+      if (b.textContent=="Expand") {
+        userjsTableViewExpandPrefDesc();
+        b.textContent="Collapse";
+      }
+      else {
+        b.textContent="Expand"
+      }
+    }
 
     function userjsTableViewWhenArkenfoxRepoMode(theme) {
 
@@ -3679,43 +3690,70 @@ function diff( o, n ) {
           indexSelectAction(this);
         });
 
-        // increase heading size (and show placeholder text)
-        document.getElementById("tableview_heading").style.fontSize="120%";
-        if (!(document.getElementById("tableview_heading").innerHTML)) {
-          document.getElementById("tableview_heading").innerHTML=
-            '<h3 style="padding: 0px; margin: 0px; display:inline;">arkenfox user.js ...</h3>';
+        document.getElementById("filter_select").options[6].disabled=true;
+        document.getElementById("filter_select").options[6].hidden=true;
+        document.getElementById("search_input").style.display="block";
+        document.getElementById("search_clear_button").style.display="block";
+        for (const i of [ "keyup" ] ) {
+          document.getElementById("search_input").addEventListener(i, function() {
+            userjsTableViewTagFilter(null,this.value); }
+          );
         }
+        document.getElementById("search_clear_button").addEventListener("click", function() {
+          if (!(document.getElementById("search_input").value=="")) {
+            userjsTableViewTagFilter(null,"");
+          } }
+        );
 
-        // rename the collapse/expand details buttons (was [-] [+])
-        document.getElementById("collapse_button").innerHTML="Collapse";
-        document.getElementById("expand_button").innerHTML="Expand";
-        document.getElementById("collapse_button").style.width="8em";
-        document.getElementById("expand_button").style.width="8em";
+        document.getElementById("about_button").addEventListener("click", function() {
+            if (document.getElementById("about_afmode").style.display=="block") {
+              document.getElementById("about_afmode").style.display="none";
+            }
+            else {
+              document.getElementById("about_afmode").style.display="block";
+            }
+          }
+        );
+        
+        document.getElementById("expand_collapse_button").style.width="8em";
+        document.getElementById("expand_collapse_button").style.display="block";
+        document.getElementById("about_button").style.width="8em";
+        document.getElementById("about_button").style.display="block";
+        document.getElementById("version_button").style.display="block";
+        
+        document.getElementById("tableview_heading_afmode").style.display="block";
+        document.getElementById("tableview_heading_afmode").style.backgroundColor="#000000";
 
         // top bar opaque and re-size
-        document.getElementById("tableview_buttons_bar").style.backgroundColor="#161b22";
+        document.getElementById("tableview_buttons_bar").style.backgroundColor="#000000";
+        document.getElementById("tableview_buttons_bar").style.border="1px solid #b3b3b3";
+        document.getElementById("tableview_buttons_bar").style.borderWidth="0px 0px 1px 0px";
         document.getElementById("tableview_buttons_bar").style.top="0";
+        document.getElementById("tableview_buttons_bar").style.left="0";
         document.getElementById("tableview_buttons_bar").style.width="100%";
-        document.getElementById("tableview_buttons_bar").style.padding="1em 0 1em 0";
-        document.getElementById("tableview_buttons_bar").style.height="5em";
+        document.getElementById("tableview_buttons_bar").style.padding="0.9em";
+        document.getElementById("tableview_buttons_bar").style.height="4em";
 
         // adjust offsets (for preventing content hidden behind top bar)
         document.getElementById("body_offset").innerHTML="";
         document.getElementById("tableview_offset").innerHTML="";
-        document.getElementById("tableview_div").style.marginTop="8em";
+        document.getElementById("tableview_div").style.marginTop="7em";
         var e = document.getElementsByClassName("anchor");
         for (var i = 0, j = e.length; i < j; i++) {
-          e[i].style.marginTop="-8em";
-          e[i].style.paddingBottom="8em";
+          e[i].style.marginTop="-7em";
+          e[i].style.paddingBottom="7em";
         }
 
-        // hide section jump buttons and slider
-        document.getElementById("jumpback_button").style.display="none";
-        document.getElementById("jumpnext_button").style.display="none";
-        document.getElementById("viewer_slider").style.display="none";
+        // hide some buttons/slider
+        for (const id of [ "tableview_heading", "collapse_button",
+          "expand_button", "jumpback_button", "jumpnext_button",
+          "viewer_slider" ] )
+        {
+          document.getElementById(id).style.display="none";
+        }
 
         // add button spacing
-        for (const id of [ "index_select_2", "collapse_button", "expand_button",
+        for (const id of [ "index_select_2", "expand_collapse_button",
           "filter_select", "jumpback_button", "jumpnext_button" ] )
         {
           document.getElementById(id).style.marginRight="1em";
@@ -3765,7 +3803,7 @@ function diff( o, n ) {
       window.history.replaceState(null, document.title,"?"+textToAdd);
     }
 
-    function userjsTableViewTagFilter(filter_tag="",filter_search="") {
+    function userjsTableViewTagFilter(filter_tag=null,filter_search=null) {
       var s = document.getElementById("filter_select");
       var svalue = s.value;
       s.selectedIndex = 0;
@@ -3808,20 +3846,22 @@ function diff( o, n ) {
         hideheadings = true;
         userjsTableViewUpdateURLBar(svalue,"t");
       }
-      else if (filter_search) {
+      else if ((filter_search) && !(filter_search=="")) {
         svalue = "SEARCH";
         search_regexp = filter_search;
         filteron = svalue;
         hideheadings = true;
         userjsTableViewUpdateURLBar(search_regexp,"s");
       }
-      else if (svalue == "SHOWALL") {
+      else if ((svalue == "SHOWALL") || (filter_search=="")) {
+        svalue = "SHOWALL";
         hideinactive = false;
         hideactive = false;
         hideheadings = false;
         invert = false;
         filteron = "";
         userjsTableViewUpdateURLBar("");
+        document.getElementById("search_input").value="";
       }
       else if (svalue == "HIDEHEADINGS") {
         svalue = "";
@@ -3849,11 +3889,22 @@ function diff( o, n ) {
           // prompt cancel button was clicked
           svalue = "";
         }
+        else if (new_regexp=="") {
+          svalue = "SHOWALL";
+          hideinactive = false;
+          hideactive = false;
+          hideheadings = false;
+          invert = false;
+          filteron = "";
+          userjsTableViewUpdateURLBar("");
+          document.getElementById("search_input").value="";
+        }
         else {
           search_regexp = new_regexp;
           filteron = svalue;
           hideheadings = true;
           userjsTableViewUpdateURLBar(search_regexp,"s");
+          document.getElementById("search_input").value=new_regexp;
         }
       }
       else if (svalue == filteron) {
@@ -4794,7 +4845,7 @@ function diff( o, n ) {
 
       content_html +=
 
-        '</span><br>'
+        '<br></span>'
 
         // collapse all button
         + '<button type="button" style="width:2em;" class="controls borders'
@@ -4808,6 +4859,12 @@ function diff( o, n ) {
         + '" id="expand_button" onclick="userjsTableViewExpandPrefDesc();"'
         + ' ondblclick="userjsTableViewExpandAll();"'
         + ' title="Expand All Descriptions (single/double click)"><b>+</b></button>'
+
+        // expand_collapse button (hidden except in afmode)
+        + '<button type="button" style="display:none;width:2em;" class="controls borders'
+        + ' controls_' + theme + ' borders_' + theme
+        + '" id="expand_collapse_button" onclick="userjsTableViewExpandCollapseAll();"'
+        + ' title="Expand/Collapse Descriptions"><b>Expand</b></button>'
 
         // filter button select
         + '<select style="width:8em;" class="controls borders'
@@ -4850,6 +4907,18 @@ function diff( o, n ) {
       content_html +=
           '</select>'
 
+        // search input box (hidden except in afmode)
+        + '<input id="search_input" type="text" value="" '
+        + 'placeholder=" &#x1f50d; Search (RegExp)"  class="controls borders'
+        + ' controls_' + theme + ' borders_' + theme
+        + '" style="display:none;text-align:left;height:1.85em;" />'
+
+        // search clear button (hidden except in afmode)
+        + '<button type="button" id="search_clear_button" class="controls borders'
+        + ' controls_' + theme + ' borders_' + theme
+        + '" title="Clear search" style="display:none;height:2em;"'
+        + '>&nbsp;&#x274C;&nbsp;</button>'
+
         // ref: http://www.amp-what.com/unicode/search/triangle
         // navigation: jumpback_button
         + '<button type="button" id="jumpback_button" class="controls borders'
@@ -4862,12 +4931,39 @@ function diff( o, n ) {
         + 'title="Jump to next section">&#9660;</button>'
         // navigation: viewer_slider
         + '<input type="range" min="0" max="50" value="0" id="viewer_slider">'
-        + '</div>'
+
+        + '<div id="tableview_heading_afmode" '
+        + 'style="display:none;text-align:right;margin-right:1em;" '
+        + 'class="body_' + theme + '">'
+
+        // about button (hidden except in afmode)
+        + '<button type="button" id="version_button" class="controls borders'
+        + ' controls_' + theme + ' borders_' + theme
+        + '" title="" style="display:none;height:2em;border:0;"'
+        + '>'
+
+      // version
+      if (/^[ \t\\\*]*(version.*)[ \t]*$/m.test(input_box.value)) {
+        content_html += "v"+(/^[ \t\\\*]*version[: \t]*(.*)[ \t]*$/m.exec(input_box.value)[1]);
+      }
+
+      content_html +=
+         '</button>'
+        // about button (hidden except in afmode)
+        + '<button type="button" id="about_button" class="controls borders'
+        + ' controls_' + theme + ' borders_' + theme
+        + '" title="" style="display:none;height:2em;"'
+        + '>About</button>'
+
+        + '<span id="about_afmode"'
+        + 'style="display:none;text-align:right;margin-right:1em;"'
+        + '><a target="_blank" '
+        + 'rel="external noopener noreferrer" class="http"'
+        + 'href="https://github.com/arkenfox/user.js">'
+        + 'https://github.com/arkenfox/user.js</a></span></div></div>'
+
         + '<div style="width: 100%;" id="tableview_div">'
-        + '<div id="tableview_offset"><br><br><br><br></div>'
-        + '(see [Filter] button for Info key)'
-        + ' (click <details style="display:inline;">'
-        + '<summary style="cursor:text;"></summary></details>to expand)<br>\n';
+        + '<div id="tableview_offset"><br><br><br><br></div>\n';
 
       var index_select_html = ''
         + '<option value="" disabled selected hidden>&#x25BE;Index</option>\n'
@@ -4886,7 +4982,7 @@ function diff( o, n ) {
       // loop through array and build each table row
       // (either: section heading or user_pref rows)
 
-      content_html += '<br><table id="table_tview">'
+      content_html += '<table id="table_tview">'
 
       content_html +=
           '<tr>'
@@ -5123,6 +5219,9 @@ function diff( o, n ) {
       // refresh as per UI settings
       togglePrefixAboutConfigLinks("refresh");
       if (toggleExpandAllOnView("status")) { userjsTableViewExpandAll(true); }
+      if (filter_search) {
+        document.getElementById("search_input").value=filter_search;
+      }
       if ( (filter_tag) || (filter_search) ) {
         userjsTableViewTagFilter(filter_tag,filter_search);
       }
@@ -7624,7 +7723,7 @@ an extension such as: uBlock Origin, uMatrix, NoScript.<br>
 <br>
 Interactive view, compare, and more for Firefox user.js (eg arkenfox user.js).<br>
 <br>
-Version&nbsp;&nbsp;&nbsp;: 2022.04.02.2 (alpha/experimental)<br>
+Version&nbsp;&nbsp;&nbsp;: 2022.04.02.3 (alpha/experimental)<br>
 
 Project&nbsp;&nbsp;&nbsp;:
 <a target="_blank" rel="external noopener noreferrer"
