@@ -13,7 +13,7 @@
 
        Name         : userjs-tool.html
        Project      : https://github.com/icpantsparti2/firefox-user.js-tool
-       Version      : 2022.04.02.4 (alpha/experimental)
+       Version      : 2022.04.02.5 (alpha/experimental)
        File         : https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/userjs-tool.html
        On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
        License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
@@ -5941,6 +5941,10 @@ function diff( o, n ) {
 
     function handleActionURLparameter() {
       var action = getURLVariable("action");
+      if (!(action)) {
+        return
+      }
+      console.log("action: "+action);
       switch (action) {
         case "view0":
           toggleActionsPanel(true);
@@ -7727,7 +7731,7 @@ an extension such as: uBlock Origin, uMatrix, NoScript.<br>
 <br>
 Interactive view, compare, and more for Firefox user.js (eg arkenfox user.js).<br>
 <br>
-Version&nbsp;&nbsp;&nbsp;: 2022.04.02.4 (alpha/experimental)<br>
+Version&nbsp;&nbsp;&nbsp;: 2022.04.02.5 (alpha/experimental)<br>
 
 Project&nbsp;&nbsp;&nbsp;:
 <a target="_blank" rel="external noopener noreferrer"
