@@ -1,0 +1,164 @@
+/*
+   Name         : userjs-tool-themes.css
+   Project      : https://github.com/icpantsparti2/firefox-user.js-tool
+   On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
+   License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
+   Version      : 2022.04.06
+*/
+
+    /* ************************************* */
+    /* color themes */
+    /* ************************************* */
+
+    /* default theme has same values as dark theme */
+    /* color codes: https://www.w3schools.com/colors/colors_groups.asp */
+
+
+    /* default theme */
+    .body_default, .view_area_default, .panels_default
+                                  { background-color: #161b22; /*(black)*/
+                                               color: #b3b3b3; /*(gray)*/ }
+    .controls_default             { background-color: #555555; /*DimGray*/
+                                               color: #C0C0C0; /*Silver*/ }
+    .controls_default:focus       { outline: 2px auto #FF0000; /*Red*/ }
+    .controls_default:hover       { background-color: #DAA520; /*GoldenRod*/
+                                               color: #000000; /*Black*/ }
+    .borders_default        { box-shadow: 3px 3px 4px #FFFFFF; /*White*/
+                                    border: 1px solid #A9A9A9; /*DarkGray*/
+                     border-width: 1px 1px 0px 1px; }
+    .view_area_default .pref                 { color: #FFFFFF; /*White*/ }
+    .body_default a                          { color: #ffbf80; /*(brown)*/ }
+    .view_area_default .false                { color: #FF6347; /*Tomato*/ }
+    .view_area_default .true                 { color: #00FF00; /*Lime*/ }
+    .view_area_default .integer              { color: #FFFF00; /*Yellow*/ }
+    .view_area_default .string               { color: #DDA0DD; /*Plum*/ }
+    .view_area_default .http                 { color: #99ccff; /*(blue)*/ }
+    .view_area_default .warn      { background-color: #FF3333; /*(Red)*/
+                                               color: #FFFFFF; /*White*/ }
+    .view_area_default .hid                  { color: #C6F3C6; /*(Green)*/ }
+    .view_area_default .ref                  { color: #98E498; /*(Green)*/ }
+
+
+    /* dark theme */
+    .body_dark, .view_area_dark, .panels_dark
+                                  { background-color: #161b22; /*(black)*/
+                                               color: #b3b3b3; /*(gray)*/ }
+    .controls_dark                { background-color: #555555; /*DimGray*/
+                                               color: #C0C0C0; /*Silver*/ }
+    .controls_dark:focus          { outline: 2px auto #FF0000; /*Red*/ }
+    .controls_dark:hover          { background-color: #DAA520; /*GoldenRod*/
+                                               color: #000000; /*Black*/ }
+    .borders_dark           { box-shadow: 3px 3px 4px #FFFFFF; /*White*/
+                                    border: 1px solid #A9A9A9; /*DarkGray*/
+                     border-width: 1px 1px 0px 1px; }
+    .view_area_dark .pref                    { color: #FFFFFF; /*White*/ }
+    .body_dark a                             { color: #ffbf80; /*(brown)*/ }
+    .view_area_dark .false                   { color: #FF6347; /*Tomato*/ }
+    .view_area_dark .true                    { color: #00FF00; /*Lime*/ }
+    .view_area_dark .integer                 { color: #FFFF00; /*Yellow*/ }
+    .view_area_dark .string                  { color: #DDA0DD; /*Plum*/ }
+    .view_area_dark .http                    { color: #99ccff; /*(blue)*/ }
+    .view_area_dark .warn         { background-color: #FF3333; /*(Red)*/
+                                               color: #FFFFFF; /*White*/ }
+    .view_area_dark .hid                     { color: #C6F3C6; /*(Green)*/ }
+    .view_area_dark .ref                     { color: #98E498; /*(Green)*/ }
+
+
+    /* light theme */
+    .body_light, .view_area_light, .panels_light
+                                  { background-color: #FFFFFF; /*White*/
+                                               color: #808080; /*Gray*/ }
+    .controls_light               { background-color: #C0C0C0; /*Silver*/
+                                               color: #000000; /*Black*/ }
+    .controls_light:focus         { outline: 2px auto #FF0000; /*Red*/ }
+    .controls_light:hover         { background-color: #DAA520; /*GoldenRod*/
+                                               color: #000000; /*Black*/ }
+    .borders_light          { box-shadow: 3px 3px 4px #000000; /*Black*/
+                                    border: 1px solid #000000; /*Black*/
+                     border-width: 1px 1px 0px 1px; }
+    .view_area_light .pref                   { color: #000000; /*Black*/ }
+    .body_light a                            { color: #D2691E; /*Chocolate*/ }
+    .view_area_light .false                  { color: #FF6347; /*Tomato*/ }
+    .view_area_light .true                   { color: #32CD32; /*LimeGreen*/ }
+    .view_area_light .integer                { color: #9932CC; /*DarkOrchid*/ }
+    .view_area_light .string                 { color: #DDA0DD; /*Plum*/ }
+    .view_area_light .http                   { color: #1982D1; /*(Blue)*/ }
+    .view_area_light .warn        { background-color: #FF3333; /*(Red)*/
+                                               color: #FFFFFF; /*White*/ }
+    .view_area_light .hid                    { color: #598033; /*(Green)*/ }
+    .view_area_light .ref                    { color: #A53C00; /*(Brown)*/ }
+
+
+    /* mono theme */
+    .body_mono, .view_area_mono, .panels_mono
+                                  { background-color: #FFFFFF; /*White*/
+                                               color: #000000; /*Black*/ }
+    .controls_mono                { background-color: #FFFFFF; /*White*/
+                                               color: #000000; /*Black*/ }
+    .controls_mono:focus          { outline: 2px auto #FF0000; /*Red*/ }
+    .controls_mono:hover          { background-color: #000000; /*Black*/
+                                               color: #FFFFFF; /*White*/ }
+    .borders_mono           { box-shadow: 3px 3px 4px #000000; /*Black*/
+                                    border: 1px solid #000000; /*Black*/
+                     border-width: 1px 1px 0px 1px; }
+    .view_area_mono .pref                    { color: #000000; /*Black*/ }
+    .body_mono a                             { color: #696969; /*DimGray*/ }
+    .view_area_mono .false                   { color: #000000; /*Black*/ }
+    .view_area_mono .true                    { color: #000000; /*Black*/ }
+    .view_area_mono .integer                 { color: #000000; /*Black*/ }
+    .view_area_mono .string                  { color: #000000; /*Black*/ }
+    .view_area_mono .http                    { color: #696969; /*DimGray*/ }
+    .view_area_mono .warn         { background-color: #000000; /*Black*/
+                                               color: #FFFFFF; /*White*/ }
+    .view_area_mono .hid                     { color: #000000; /*Black*/ }
+    .view_area_mono .ref                     { color: #000000; /*Black*/ }
+
+
+    /* inverse theme */
+    .body_inverse, .view_area_inverse, .panels_inverse
+                                  { background-color: #000000; /*Black*/
+                                               color: #FFFFFF; /*White*/ }
+    .controls_inverse             { background-color: #000000; /*Black*/
+                                               color: #FFFFFF; /*White*/ }
+    .controls_inverse:focus       { outline: 2px auto #FF0000; /*Red*/ }
+    .controls_inverse:hover       { background-color: #FFFFFF; /*White*/
+                                               color: #000000; /*Black*/ }
+    .borders_inverse        { box-shadow: 3px 3px 4px #FFFFFF; /*White*/
+                                    border: 1px solid #FFFFFF; /*White*/
+                     border-width: 1px 1px 0px 1px; }
+    .view_area_inverse .pref                 { color: #FFFFFF; /*White*/ }
+    .body_inverse a                          { color: #D3D3D3; /*LightGray*/ }
+    .view_area_inverse .false                { color: #FFFFFF; /*White*/ }
+    .view_area_inverse .true                 { color: #FFFFFF; /*White*/ }
+    .view_area_inverse .integer              { color: #FFFFFF; /*White*/ }
+    .view_area_inverse .string               { color: #FFFFFF; /*White*/ }
+    .view_area_inverse .http                 { color: #D3D3D3; /*LightGray*/ }
+    .view_area_inverse .warn      { background-color: #FFFFFF; /*White*/
+                                               color: #000000; /*Black*/ }
+    .view_area_inverse .hid                  { color: #FFFFFF; /*White*/ }
+    .view_area_inverse .ref                  { color: #FFFFFF; /*White*/ }
+
+
+    /* arkenfox theme */
+    .body_arkenfox, .view_area_arkenfox, .panels_arkenfox
+                                  { background-color: #161b22;
+                                               color: #b3b3b3; }
+    .controls_arkenfox                { background-color: #161b22;
+                                               color: #b3b3b3; }
+    .controls_arkenfox:focus          { outline: 2px auto #FF0000; }
+    .controls_arkenfox:hover          { background-color: #dcdc8c;
+                                               color: #000000; }
+    .borders_arkenfox           { /*box-shadow: 3px 3px 4px #808080;*/
+                                    border: 1px solid #b3b3b3;
+                     border-width: 1px 1px 1px 1px; }
+    .view_area_arkenfox .pref                    { color: #ffffff; } /* section header */
+    .body_arkenfox a                             { color: #b3b3b3; } /* prefname */
+    .view_area_arkenfox .false                   { color: #f07878; }
+    .view_area_arkenfox .true                    { color: #78f0c8; }
+    .view_area_arkenfox .integer                 { color: #c8f078; }
+    .view_area_arkenfox .string                  { color: #a078f0; }
+    .view_area_arkenfox .http                    { color: #78a0f0; } /* a http */
+    .view_area_arkenfox .warn         { background-color: #ff4f4f;
+                                               color: #FFFFFF; }
+    .view_area_arkenfox .hid                     { color: #78c8f0; }
+    .view_area_arkenfox .ref                     { color: #78f078; } /* id+desc */
