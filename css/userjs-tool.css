@@ -1,0 +1,422 @@
+/*
+   Name         : userjs-tool.css
+   Project      : https://github.com/icpantsparti2/firefox-user.js-tool
+   On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
+   License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
+   Version      : 2022.04.06
+*/
+
+    /* main blocks */
+
+    body {
+      font-family: Consolas,"Courier New","Liberation Mono",monospace;
+      font-size: 100%;
+      /* white-space: normal|nowrap|pre|pre-line|pre-wrap|initial|inherit; */
+      /* word-wrap: normal|break-word|initial|inherit; */
+      /* overflow: visible|hidden|scroll|auto|initial|inherit; */
+      /* float: none|left|right|initial|inherit; */
+    }
+
+    /* actions/groups/links/functions/help panels */
+    .panels {
+      display: none;
+      position: fixed;
+      top: 5em;
+      width: 85vw;
+      min-width: 85vw;
+      max-width: 85vw;
+      height: 75vh;
+      min-height: 0vh;
+      max-height: 75vh;
+      padding: 20px;
+      overflow: auto;
+      white-space: normal;
+      /* theme will override the following */
+      background-color: #FFFFFF; /*White*/
+      box-shadow: 3px 3px 4px #000000; /*Black*/
+      border: 1px solid #000000; /*Black*/
+      border-width: 1px 1px 0px 1px;
+    }
+
+    #view_area, #groups_panel { white-space: nowrap; }
+    #diffstr_area { white-space: pre; }
+
+
+    /* help_panel */
+    #help_panel { display: block; }
+    #help_panel_nojs_div {
+      display: block;
+      padding: 20px;
+      margin: 0px 0px 20px 0px;
+      overflow: auto;
+      white-space: normal;
+      width: 90%;
+      /* default borders */
+      box-shadow: 3px 3px 4px #000000; /*Black*/
+      border: 1px solid #000000; /*Black*/
+      border-width: 1px 1px 0px 1px;
+    }
+    .indentdiv {
+      margin: 0px 0px 0px 20px;
+    }
+
+
+    /* all buttons and selects */
+    .controls {
+      font: inherit;
+      padding: 5px;
+      float: left;
+      overflow: hidden;
+      white-space: pre;
+      -moz-appearance: none;
+      text-align: center;
+    }
+
+    /* main buttons at the top */
+    #top_buttons_bar {
+      display: inline-block;
+      position: fixed;
+      background-color: transparent;
+    }
+    .top_buttons
+    {
+      display: inline-block;
+      width: 5em;
+      max-width: 5em;
+      height: 2.6em;
+      padding: 0;
+    }
+
+
+    .close_panel_x {
+      font-weight: bold;
+      font-size: 300%;
+      cursor: pointer;
+      position: fixed; /*absolute;*/
+      top: 5vh;
+      left: 80.5vw;
+      transform: translate(100%, 100%);
+    }
+
+
+    /* within actions panel */
+    #div_1_2, #div_3_4 {
+      width: 100%;
+      overflow: hidden;
+    }
+    /* actions tables */
+    .td1_actions {
+      text-align: left;
+      vertical-align: top;
+      width: 10%;
+      padding: 0px 10px 0px 0px;
+    }
+    .td2_actions {
+      text-align: left;
+      vertical-align: top;
+      width: 90%;
+      padding: 0px 10px 0px 0px;
+    }
+    /* input boxes */
+    textarea {
+      font: inherit;
+      background-color: inherit;
+      color: inherit;
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      height: 11.5em;
+      min-height: 11.5em;
+      max-height: 50vh;
+      white-space: pre;
+      resize: vertical;
+      margin: 0px 0px 0px 0px;
+    }
+    /* buttons above input boxes */
+    #actions_buttons_bar { margin: 0 0 4em 0; }
+    #div_1_template_button,
+    #div_2_overrides_button,
+    #div_3_userjs_button,
+    #div_4_other_button,
+    #all_button {
+      padding: 0px;
+      height: 3em;
+      width: 6.5em;
+    }
+    #all_button { width: 3em; }
+    /* buttons left of input boxes */
+    #box_1_template_ro, #box_2_overrides_ro,
+    #box_3_userjs_ro, #box_4_other_ro {
+      display: inline-block;
+      cursor: cell;
+    }
+    #div_1_template .controls, #div_2_overrides .controls,
+    #div_3_userjs .controls, #div_4_other .controls,
+    #select_functions_button {
+      height: 2.3em;
+      width: 7.7em;
+    }
+    #load_template_input, #load_overrides_input,
+    #load_userjs_input, #load_other_input {
+      height: 1.9em !important;
+      width: 7em !important;
+    }
+
+    /* buttons under input boxes */
+    #actions_buttons_div {
+      white-space: normal;
+      padding: 15px 0px;
+      width: 100%;
+      float: left;
+    }
+    #actions_buttons_div .controls {
+      height: 2.4em;
+      width: 10em;
+      float: none;
+    }
+    #endcollect_button, #endcollect_br { display: none; }
+
+    #functions_panel_textarea {
+      width: 99%;
+      min-width: 99%;
+      max-width: 99%;
+      height: 70%;
+      min-height: 11.5em;
+      max-height: 100%;
+    }
+
+    /* links panel */
+    .table_links {
+      width: 95%;
+      border-collapse: collapse;
+    }
+    .td1_links {
+      border: 1px solid;
+      text-align: left;
+      vertical-align: top;
+      vertical-align: center;
+      padding: 10px;
+      width: 80%;
+    }
+    .td2_links {
+      border: 1px solid;
+      text-align: left;
+      vertical-align: top;
+      vertical-align: center;
+      padding: 10px;
+      width: 20%;
+    }
+    .td3_links {
+      border-left: 0px;
+      border-right: 0px;
+    }
+
+    /* compare */
+    /* compare stats table */
+    #table_stats {
+      width: 95%;
+      border-spacing: 1px;
+    }
+    .td1_stats_count, .td2_stats_count {
+      width: 10%;
+      text-align: right;
+      padding: 0px 20px 0px 0px;
+    }
+    .td3a_stats_name { width:80%; }
+    .td3b_stats_name { width:90%; }
+    /* compare table */
+    #table_comp {
+      table-layout: fixed;
+      width: 95%;
+      border-spacing: 1px;
+      white-space: normal;
+    }
+    .td_comp {
+      border: 1px dotted;
+      vertical-align: top;
+      word-break: break-all;
+      padding: 0px 10px 0px 10px;
+    }
+    .td1a_comp_name { width: 30%; }
+    .td1b_comp_name { width: 40%; }
+    .td2td4_comp_state { width: 2em; }
+    .td3td5_comp_value { width: auto; }
+    .td3td5_b_comp_value { width: 100%; }
+    .td_comp_dashed { border-top: 1px dashed; }
+    .td_comp_diff { border: solid 3px; }
+    /* #table_comp tr:hover { outline: 3px dashed #FF0000; } */
+
+    /* tableview */
+    #table_tview {
+      table-layout: fixed;
+      width: 100%;
+      border-spacing: 1px;
+      white-space: normal;
+      border-collapse: collapse;
+    }
+    .tr_tview_heading {
+      border: solid 3px;
+      white-space: pre;
+      border-left: 0px;
+      border-right: 0px;
+    }
+    /* https://css-tricks.com/hash-tag-links-padding/ */
+    .anchor {
+      margin-top: -165px;
+      padding-bottom: 165px;
+      display: block;
+    }
+    .anav {
+      display: inline-block;
+      cursor: pointer;
+    }
+    .tr_tview_inactive {
+      background-color: #373737;
+    }
+    .td_tview_all {
+      border: 1px dotted;
+      border-left: 0px;
+      border-right: 0px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      padding: 10px;
+    }
+    .td_tview_all a {
+      word-break: break-all;
+    }
+    /* .tr_tview_pref:hover { outline: 3px dashed #FF0000; } */
+    .td_tview_id { width: 3.5em;  }
+    .td_tview_name { width: 20%; }
+    .td_tview_value { width: 10%; }
+    .td_tview_desc { width: auto; }
+    .td_tview_info { width: 5em; }
+    .td_hide { display: none; }
+
+
+    /* buttons bar and navigation (on compare and tableview) */
+    /* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
+    #compare_buttons_bar, #tableview_buttons_bar {
+      width: auto;
+      position: fixed;
+      top: 5em;
+      /*background-color: inherit;*/
+    }
+    #compare_buttons_bar .controls, #tableview_buttons_bar .controls {
+      height: 2em;
+      /*min-width: 6.5em;*/
+      /*width: auto;*/
+    }
+    #compare_buttons_bar .controls {
+      padding: 0 0.2em 0 0.2em;
+      min-width: 4em;
+    }
+    #tableview_buttons_bar .controls {
+      padding: 0;
+    }
+    #viewer_slider {
+      -webkit-appearance: none;
+      width: calc(100% - 22em);
+      max-width: 75vw;
+      height: 2.2em;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.4;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+      float: left;
+    }
+    #viewer_slider:hover { opacity: 1; }
+    #viewer_slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 2.1em;
+      height: 2.1em;
+      background: #4CAF50;
+      cursor: pointer;
+    }
+    #viewer_slider::-moz-range-thumb {
+      width: 2.1em;
+      height: 2.1em;
+      background: #4CAF50;
+      cursor: pointer;
+    }
+
+
+    /* within view area */
+    #collect_mode_pad { display: none; white-space: normal; }
+    .heading_buttons {
+      padding-left: 20px;
+      width: 86%;
+      text-align: left;
+      float: none;
+    }
+    .content {
+      display: none;
+      margin: auto;
+      padding: 20px 0px 0px 20px;
+      white-space: pre;
+    }
+
+
+    .hidden { display: none; }
+    a { text-decoration: none; }
+    a:hover, button:hover, .pref, .false, .true,
+    .integer, .string, .warn, .hid, .ref
+    {
+      font-weight: bold;
+    }
+    .setup { font-weight: bold; text-decoration: underline; }
+    details > summary { font-weight: bold; }
+    details > summary:hover { cursor: pointer; }
+    /* details[open] > summary { text-decoration: underline; } */
+    del { font-weight: bold; }
+    ins { text-decoration: none; }
+    .jump {
+      color: #FF0000 !important; /*Red*/
+      background-color: #FFFF00 !important; /*Yellow*/
+    }
+
+    .vcentertext {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      flex-direction: column;
+    }
+
+    #afgui_about {
+      display: none;
+      position: fixed;
+      top: 6em;
+      left: 25vw;
+      width: 50vw;
+      min-width: 50vw;
+      max-width: 50vw;
+      /* height: 50vh; */
+      min-height: 0vh;
+      max-height: 50vh;
+      padding: 20px;
+      overflow: auto;
+      white-space: normal;
+      background-color: inherit;
+    }
+
+    #tview_search_input {
+      width: 25vw;
+      min-width: 4em;
+    }
+
+    .afmode_button {
+      width: 8em;
+    }
+
+    @media screen and (max-width: 669px) {
+      .afmode_button_text {
+        display: block;
+      }
+      .afmode_button {
+        width: 2em;
+      }
+      .button_text {
+        display: none;
+      }
+    }
