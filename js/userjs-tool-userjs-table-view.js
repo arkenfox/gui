@@ -2,7 +2,7 @@
 // Project      : https://github.com/icpantsparti2/firefox-user.js-tool
 // On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
 // License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
-// Version      : 2022.04.06
+// Version      : 2022.04.07
 
     // *************************************
     // various functions for userjsTableView
@@ -38,14 +38,14 @@
     }
 
     function userjsTableViewExpandCollapseAll() {
-      var b = document.getElementById("expand_collapse_button");
+      var b = document.getElementById("tview_expand_collapse_button");
       userjsTableViewCollapseAll();
       if (/Expand/.test(b.innerHTML)) {
         userjsTableViewExpandPrefDesc();
-        b.innerHTML='<b>-</b><span class="button_text"> Collapse</span>';
+        b.innerHTML='<b>-</b><span class="button_text">&#x00A0;&#x00A0;Collapse</span>';
       }
       else {
-        b.innerHTML='<b>+</b><span class="button_text"> Expand</span>';
+        b.innerHTML='<b>+</b><span class="button_text">&#x00A0;&#x00A0;Expand</span>';
       }
     }
 
@@ -86,7 +86,7 @@
     ////////////////////////////////////////////////////////
 
     function userjsTableViewTagFilter(filter_tag=null,filter_search=null) {
-      var s = document.getElementById("filter_select");
+      var s = document.getElementById("tview_filter_select");
       var svalue = s.value;
       s.selectedIndex = 0;
       var hideheadingsoption = 2;
@@ -698,7 +698,8 @@
                   || (tags[i].rx.test(prefArray[last_index].comment))
                 ) {
                   if (tags[i].indicator) {
-                    prefArray[last_index].info += tags[i].indicator + ' ';
+                    prefArray[last_index].info += '<abbr title="'
+                      + i + '">' + tags[i].indicator + '</abbr> ';
                   }
                   prefArray[last_index].tagclass += "TAGS_" + i + " ";
                   tags[i].count++;
@@ -873,7 +874,8 @@
               tags[i].rx.lastIndex = 0;
               if (tags[i].secflag) {
                 if (tags[i].indicator) {
-                  prefArray[last_index].info += tags[i].indicator + ' ';
+                  prefArray[last_index].info += '<abbr title="'
+                    + i + '">' + tags[i].indicator + '</abbr> ';
                 }
               }
             }
@@ -885,7 +887,8 @@
               tags[i].rx.lastIndex = 0;
               if (tags[i].subflag) {
                 if (tags[i].indicator) {
-                  prefArray[last_index].info += tags[i].indicator + ' ';
+                  prefArray[last_index].info += '<abbr title="'
+                    + i + '">' + tags[i].indicator + '</abbr> ';
                 }
               }
             }
@@ -1002,7 +1005,8 @@
               || (tags[i].rx.test(prefArray[last_index].comment))
             ) {
               if (tags[i].indicator) {
-                prefArray[last_index].info += tags[i].indicator + ' ';
+                prefArray[last_index].info += '<abbr title="'
+                  + i + '">' + tags[i].indicator + '</abbr> ';
               }
               prefArray[last_index].tagclass += "TAGS_" + i + " ";
               tags[i].count++;
@@ -1039,7 +1043,8 @@
             tags[i].rx.lastIndex = 0;
             if ( (alreadyintagclass) || (tags[i].rx.test(prefCommentPlus)) ) {
               if (tags[i].indicator) {
-                prefArray[last_index].info += tags[i].indicator + ' ';
+                prefArray[last_index].info += '<abbr title="'
+                  + i + '">' + tags[i].indicator + '</abbr> ';
               }
               if (!alreadyintagclass) {
                 prefArray[last_index].tagclass += tagclasstext;
@@ -1106,8 +1111,8 @@
       ////////////////////////////////////////
 
       var content_html =
-          '<div id="tableview_buttons_bar"><div>'
-        + '<span id="tableview_heading" class="body_' + theme + '">';
+          '<div id="tview_buttons_div"><div>'
+        + '<span id="tview_heading" class="afmode2none body_' + theme + '">';
 
       // title eg arkenfox user.js (date) (version)
       if (/^[ \t\\\*]*name[ \t:]*(.*)[ \t]*$/m.test(input_box.value)) {
@@ -1131,37 +1136,39 @@
         '<br></span></div><div style="float:left;width:100%;">'
 
         // collapse all button
-        + '<button type="button" style="width:2em;" class="controls borders'
-        + ' controls_' + theme + ' borders_' + theme
-        + '" id="collapse_button" onclick="userjsTableViewCollapseAll();"'
+        + '<button id="tview_collapse_button" type="button" style="width:2em;"'
+        + ' class="afmode2none controls borders controls_'+theme+' borders_'+theme+'"'
+        + ' onclick="userjsTableViewCollapseAll();"'
         + ' title="Collapse All Descriptions"><b>-</b></button>'
 
         // expand all button
-        + '<button type="button" style="width:2em;" class="controls borders'
-        + ' controls_' + theme + ' borders_' + theme
-        + '" id="expand_button" onclick="userjsTableViewExpandPrefDesc();"'
+        + '<button id="tview_expand_button" type="button" style="width:2em;"'
+        + ' class="afmode2none controls borders controls_'+theme+' borders_'+theme+'"'
+        + ' onclick="userjsTableViewExpandPrefDesc();"'
         + ' ondblclick="userjsTableViewExpandAll();"'
         + ' title="Expand All Descriptions (single/double click)"><b>+</b></button>'
 
         // expand_collapse button (hidden except in afmode)
-        + '<button type="button" style="display:none;" class="controls borders'
-        + ' controls_' + theme + ' borders_' + theme
-        + ' afmode_button" id="expand_collapse_button" onclick="userjsTableViewExpandCollapseAll();"'
-        + ' title="Expand/Collapse Descriptions"><b>+</b><span class="button_text"> Expand</span></button>'
+        + '<button id="tview_expand_collapse_button" type="button" '
+        + ' class="afmode2block afmode_button controls borders'
+        + ' controls_' + theme + ' borders_' + theme + '"'
+        + ' onclick="userjsTableViewExpandCollapseAll();"'
+        + ' title="Expand/Collapse Descriptions">'
+        + '<b>+</b><span class="button_text">&#x00A0;&#x00A0;Expand</span></button>'
 
         // filter button select
-        + '<select class="controls borders'
-        + ' controls_' + theme + ' borders_' + theme
-        + ' afmode_button" id="filter_select" onchange="userjsTableViewTagFilter();" '
-        + 'title="Filter tags/text">'
-        + '  <option value="" disabled selected hidden>&#x25BE;&#x00A0;&#x25A2;&#x00A0;Filter</option>'
+        + '<select id="tview_filter_select" class="controls borders'
+        + ' controls_' + theme + ' borders_' + theme + ' afmode_button"'
+        + ' onchange="userjsTableViewTagFilter();" '
+        + 'title="Filter">'
+        + '  <option value="" disabled selected hidden>&#x00A0;&#x25A2;&#x00A0;&#x00A0;Filter</option>'
         + '  <option value="SHOWALL">Show all (clear filter)'
         + '&#x00A0;&#x00A0;&#x00A0;&#x00A0;(' + stats["total"].count + ')</option>'
         + '  <option value="HIDEHEADINGS">&#x25A2;&#x00A0;&#x00A0;Hide headings</option>'
         + '  <option value="HIDEINACTIVE">&#x25A2;&#x00A0;&#x00A0;Hide inactive</option>'
         + '  <option value="HIDEACTIVE">&#x25A2;&#x00A0;&#x00A0;Hide active</option>'
         + '  <option value="INVERT">&#x25A2;&#x00A0;&#x00A0;Invert (show the opposite)</option>'
-        + '  <option value="SEARCH">&#x25A2;&#x00A0;&#x00A0;&#x1f50d;'
+        + '  <option id="tview_filter_select_search_option" value="SEARCH">&#x25A2;&#x00A0;&#x00A0;&#x1f50d;'
         + ' Search&#x00A0;(0;0)&#x00A0;</option>'
         // + '  <option disabled></option>'
         + '  <option value="TAGS_Active">&#x25A2;&#x00A0;&#x00A0;'
@@ -1191,39 +1198,52 @@
           '</select>'
 
         // search input box (hidden except in afmode)
-        + '<input id="tview_search_input" type="text" value="" '
-        + 'placeholder=" &#x1f50d; Search (RegExp)"  class="controls borders'
-        + ' controls_' + theme + ' borders_' + theme
-        + '" style="display:none;text-align:left;height:1.8em;" />'
+        + '<input id="tview_search_input" type="text" value=""'
+        + ' placeholder=" &#x1f50d; Search"'
+        + ' title="Search (Regular Expressions)"'
+        + ' class="afmode2block controls borders'
+        + ' controls_' + theme + ' borders_' + theme + '"'
+        + ' style="text-align:left;height:1.8em;padding-left:0.5em;" />'
 
         // search clear button (hidden except in afmode)
-        + '<button type="button" id="search_clear_button" class="controls borders'
-        + ' controls_' + theme + ' borders_' + theme
-        + '" title="Clear search" style="display:none;height:2em;"'
+        + '<button type="button" id="tview_search_clear_button"'
+        + ' class="afmode2block controls borders'
+        + ' controls_' + theme + ' borders_' + theme + '"'
+        + ' title="Clear search" style="height:2em;"'
         + '>&nbsp;&#x274C;&nbsp;</button>'
 
         // ref: http://www.amp-what.com/unicode/search/triangle
-        // navigation: jumpback_button
-        + '<button type="button" id="jumpback_button" class="controls borders'
-        + ' controls_' + theme + ' borders_' + theme
-        + '" style="width:2em;" title="Jump back a section">&#9650;</button>'
-        // navigation: jumpnext_button
-        + '<button type="button" id="jumpnext_button" class="controls borders'
-        + ' controls_' + theme + ' borders_' + theme
-        + '" style="width:2em;margin-right:0.5em;" '
-        + 'title="Jump to next section">&#9660;</button>'
-        // navigation: viewer_slider
-        + '<input type="range" min="0" max="50" value="0" id="viewer_slider">'
+
+        // navigation: tview_jumpback_button
+        + '<button id="tview_jumpback_button" type="button"'
+        + ' class="afmode2none controls borders controls_'+theme+' borders_'+theme+'"'
+        + ' style="width:2em;"'
+        + ' title="Jump back a section">&#9650;</button>'
+
+        // navigation: tview_jumpnext_button
+        + '<button id="tview_jumpnext_button" type="button"'
+        + ' class="afmode2none controls borders controls_'+theme+' borders_'+theme+'"'
+        + ' style="width:2em;margin-right:0.5em;"'
+        + ' title="Jump to next section">&#9660;</button>'
+
+        // navigation: tview_slider
+        + '<input id="tview_slider" type="range"'
+        + ' class="afmode2none" min="0" max="50" value="0">'
+
+        // right side spacer (hidden except in afmode)
+        + '<div class="afmode2block" style="float:right;height:2em;width:1em;"></div>'
 
         // about button (hidden except in afmode)
-        + '<button type="button" id="about_button" class="controls borders'
-        + ' controls_' + theme + ' borders_' + theme
-        + ' afmode_button" title="About" style="display:none;float:right;height:2em;"'
-        + '><span class="">&#8505;</span><span class="button_text"> About</span></button>'
+        + '<button type="button" id="tview_about_button"'
+        + ' class="afmode2block afmode_button controls borders'
+        + ' controls_' + theme + ' borders_' + theme + '"'
+        + ' title="About" style="display:none;float:right;height:2em;"'
+        + '><span class="">&#8505;</span><span class="button_text">'
+        + '&#x00A0;&#x00A0;About</span></button>'
 
         // version button (hidden except in afmode)
-        + '<div id="version_button" class="vcentertext"'
-        + '" style="display:none;float:right;height:2em;"><b>'
+        + '<div id="tview_version_div" class="afmode2flex vcentertext"'
+        + '" style="float:right;height:2em;"><b>'
 
       // version
       if (/^[ \t\\\*]*(version.*)[ \t]*$/m.test(input_box.value)) {
@@ -1233,15 +1253,15 @@
       content_html +=
          '</b></div></div>'
 
-        + '<div id="afgui_about" class="borders' + ' borders_' + theme
+        + '<div id="tview_about_div" class="borders' + ' borders_' + theme
         + ' style="display:none;'
         + 'padding:1em 0;overflow-wrap:anywhere;word-break:normal;white-space:normal"'
-        + '><div id="afgui_about_insert"></div><br>'
-        + '<button type="button" id="afgui_about_close_button" class="controls borders'
+        + '><div id="tview_about_inner_div"></div><br>'
+        + '<button type="button" id="tview_about_div_close_button" class="controls borders'
         + ' controls_' + theme + ' borders_' + theme
-        + ' afmode_button" style="float:right;height:2em;"'
-        + ' onclick=document.getElementById("afgui_about").style.display="none";'
-        + '>Close</button>'
+        + ' afmode_button" style="float:right;height:2em;" title="Close"'
+        + ' onclick=document.getElementById("tview_about_div").style.display="none";'
+        + '>&#x26CC;<span class="button_text">&#x00A0;&#x00A0;Close</span></button>'
         + '</div></div>'
 
         + '<div style="width: 100%;" id="tableview_div">'
@@ -1309,10 +1329,7 @@
             // pref info (state etc)
             + '<td class="td_tview_all td_hide"> </td>'
             + '<td class="td_tview_all td_tview_info">'
-            + prefArray[i].info
-              .replace(new RegExp('<span class="setup">S</span> '
-                + '(<span class="setup">S.</span>)'), "$1")
-            + '</td></tr>';
+            + prefArray[i].info + '</td></tr>';
 
           // end and start about:config bookmarks groups
           if (sectionCount > 1) {
@@ -1392,10 +1409,7 @@
             + '<td class="td_tview_all td_tview_info">'
             + ((prefArray[i].state=="") ? ""
               : '<span class="pref">' + prefArray[i].state + '</span><br>')
-            + prefArray[i].info
-              .replace(new RegExp('<span class="setup">S</span> '
-                + '(<span class="setup">S.</span>)'), "$1")
-            + '</td></tr>';
+            + prefArray[i].info + '</td></tr>';
 
             // collect prefname for pref groups
             if (prefArray[i].name) {
@@ -1448,7 +1462,7 @@
       groups_container_html = null;
 
       // back
-      document.getElementById("jumpback_button").addEventListener("click", function() {
+      document.getElementById("tview_jumpback_button").addEventListener("click", function() {
         var e = document.getElementsByClassName("anchor");
         var id = 0;
         for (var i = 0, j = e.length; i<j; i++) {
@@ -1459,7 +1473,7 @@
             id = i + 1;
           }
         }
-        document.getElementById("viewer_slider").value = id;
+        document.getElementById("tview_slider").value = id;
         if (id == 0) {
           scroll(0,0);
         }
@@ -1469,7 +1483,7 @@
       });
 
       // next
-      document.getElementById("jumpnext_button").addEventListener("click", function() {
+      document.getElementById("tview_jumpnext_button").addEventListener("click", function() {
         var e = document.getElementsByClassName("anchor");
         var id = 1;
         for (var i = 0, j = e.length; i<j; i++) {
@@ -1480,7 +1494,7 @@
             id = i + 2;
           }
         }
-        document.getElementById("viewer_slider").value = id;
+        document.getElementById("tview_slider").value = id;
         if (id == 0) {
           scroll(0,0);
         }
@@ -1490,9 +1504,9 @@
       });
 
       // nav slider usage jump to position
-      document.getElementById("viewer_slider").max = sectionCount;
+      document.getElementById("tview_slider").max = sectionCount;
       for (const event of [ "input", "click" ]) {
-        document.getElementById("viewer_slider").addEventListener(event, function() {
+        document.getElementById("tview_slider").addEventListener(event, function() {
           if (this.value == 0) {
             scroll(0,0);
           }
@@ -1520,7 +1534,7 @@
       }
       if (typeof arkenfoxRepoMode != "undefined") {
         if (arkenfoxRepoMode) {
-          userjsTableViewWhenArkenfoxRepoMode(theme);
+          userjsTableViewWhenArkenfoxRepoMode();
         }
       }
 
