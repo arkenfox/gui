@@ -1,0 +1,50 @@
+/*
+   Name         : userjs-tool-af-mode.css
+   Project      : https://github.com/icpantsparti2/firefox-user.js-tool
+   On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
+   License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
+   Version      : 2022.04.07
+*/
+
+    #tview_about_div {
+      display: none;
+      position: fixed;
+      top: 6em;
+      left: 25vw;
+      width: 50vw;
+      min-width: 50vw;
+      max-width: 50vw;
+      /* height: 50vh; */
+      min-height: 0vh;
+      max-height: 50vh;
+      padding: 20px;
+      overflow: auto;
+      white-space: normal;
+      background-color: inherit;
+    }
+
+    #tview_search_input {
+      width: 25vw;
+      min-width: 4em;
+    }
+
+    /* these classes will be changed with js */
+    .afmode2block, .afmode2flex {
+      display: none;
+    }
+
+    .afmode_button {
+      width: 8em;
+    }
+
+    @media screen and (max-width: 669px) {
+      .afmode_button_text {
+        display: block;
+      }
+      .afmode_button {
+        width: 2.5em;
+      }
+      .button_text {
+        display: none;
+      }
+    }
