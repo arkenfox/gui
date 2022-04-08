@@ -3,7 +3,7 @@
    Project      : https://github.com/icpantsparti2/firefox-user.js-tool
    On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
    License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
-   Version      : 2022.04.06
+   Version      : 2022.04.07
 */
 
     /* main blocks */
@@ -295,13 +295,13 @@
 
     /* buttons bar and navigation (on compare and tableview) */
     /* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
-    #compare_buttons_bar, #tableview_buttons_bar {
+    #compare_buttons_bar, #tview_buttons_div {
       width: auto;
       position: fixed;
       top: 5em;
       /*background-color: inherit;*/
     }
-    #compare_buttons_bar .controls, #tableview_buttons_bar .controls {
+    #compare_buttons_bar .controls, #tview_buttons_div .controls {
       height: 2em;
       /*min-width: 6.5em;*/
       /*width: auto;*/
@@ -310,10 +310,10 @@
       padding: 0 0.2em 0 0.2em;
       min-width: 4em;
     }
-    #tableview_buttons_bar .controls {
+    #tview_buttons_div .controls {
       padding: 0;
     }
-    #viewer_slider {
+    #tview_slider {
       -webkit-appearance: none;
       width: calc(100% - 22em);
       max-width: 75vw;
@@ -325,8 +325,8 @@
       transition: opacity .2s;
       float: left;
     }
-    #viewer_slider:hover { opacity: 1; }
-    #viewer_slider::-webkit-slider-thumb {
+    #tview_slider:hover { opacity: 1; }
+    #tview_slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
       width: 2.1em;
@@ -334,7 +334,7 @@
       background: #4CAF50;
       cursor: pointer;
     }
-    #viewer_slider::-moz-range-thumb {
+    #tview_slider::-moz-range-thumb {
       width: 2.1em;
       height: 2.1em;
       background: #4CAF50;
@@ -368,6 +368,7 @@
     .setup { font-weight: bold; text-decoration: underline; }
     details > summary { font-weight: bold; }
     details > summary:hover { cursor: pointer; }
+    abbr { cursor: help; }
     /* details[open] > summary { text-decoration: underline; } */
     del { font-weight: bold; }
     ins { text-decoration: none; }
@@ -381,42 +382,4 @@
       justify-content: center;
       align-content: center;
       flex-direction: column;
-    }
-
-    #afgui_about {
-      display: none;
-      position: fixed;
-      top: 6em;
-      left: 25vw;
-      width: 50vw;
-      min-width: 50vw;
-      max-width: 50vw;
-      /* height: 50vh; */
-      min-height: 0vh;
-      max-height: 50vh;
-      padding: 20px;
-      overflow: auto;
-      white-space: normal;
-      background-color: inherit;
-    }
-
-    #tview_search_input {
-      width: 25vw;
-      min-width: 4em;
-    }
-
-    .afmode_button {
-      width: 8em;
-    }
-
-    @media screen and (max-width: 669px) {
-      .afmode_button_text {
-        display: block;
-      }
-      .afmode_button {
-        width: 2em;
-      }
-      .button_text {
-        display: none;
-      }
     }
