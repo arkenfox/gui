@@ -2,7 +2,7 @@
 // Project      : https://github.com/icpantsparti2/firefox-user.js-tool
 // On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
 // License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
-// Version      : 2022.04.07
+// Version      : 2022.04.07.2
 
     ////////////////////////////////////////
     // userjsTableViewWhenArkenfoxRepoMode
@@ -242,13 +242,15 @@
 
       // list the urls in the hardcoded user.js
       if (/^\?(u)($|&)/.test(location.search)) {
-        // https://javascript.tutorialink.com/extract-urls-from-paragraph-or-block-of-text-using-a-regular-expression/
-        var urlRegex = /((mailto:|ftp:\/\/|https?:\/\/)\S+?)[^\s]+/ig;
-        document.getElementById("tableview_div").insertAdjacentHTML("afterbegin",
-          '<textarea readonly>'
-          + '// ' + (returnDateTime()) + " URLs from user.js in arkenfox gui\n"
-          + (txtbx.value.match(urlRegex).join('\n')) + "\n"
-          + '</textarea>');
+        setTimeout(function(){
+          // https://javascript.tutorialink.com/extract-urls-from-paragraph-or-block-of-text-using-a-regular-expression/
+          var urlRegex = /((mailto:|ftp:\/\/|https?:\/\/)\S+?)[^\s]+/ig;
+          document.getElementById("tableview_div").insertAdjacentHTML("afterbegin",
+            '<textarea readonly>'
+            + '// ' + (returnDateTime()) + " URLs from user.js in arkenfox gui\n"
+            + (txtbx.value.match(urlRegex).join('\n')) + "\n"
+            + '</textarea>');
+        }, 500);
       }
 
     }
