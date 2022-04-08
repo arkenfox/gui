@@ -2,7 +2,7 @@
 // Project      : https://github.com/icpantsparti2/firefox-user.js-tool
 // On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
 // License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
-// Version      : 2022.04.06
+// Version      : 2022.04.07
 
     // *************************************
     // returnDateTime
@@ -244,7 +244,7 @@
           .test(document.getElementById("view_area").innerHTML)
         ) {
           /* for compare or tableview */
-          document.getElementById("viewer_slider").value = id;
+          document.getElementById("tview_slider").value = id;
           if (id == 0) {
             scroll(0,0);
           }
