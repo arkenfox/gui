@@ -1,0 +1,196 @@
+/*
+   Name         : userjs-tool-userjs-table-view.css
+   Project      : https://github.com/icpantsparti2/firefox-user.js-tool
+   On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
+   License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
+   Version      : 2022.04.08
+*/
+
+    /* tableview */
+    #table_tview {
+      table-layout: fixed;
+      width: 100%;
+      border-spacing: 1px;
+      white-space: normal;
+      border-collapse: collapse;
+    }
+    .tr_tview_heading {
+      border: solid 3px;
+      white-space: pre;
+      border-left: 0px;
+      border-right: 0px;
+    }
+    /* https://css-tricks.com/hash-tag-links-padding/ */
+    .anchor {
+      margin-top: -165px;
+      padding-bottom: 165px;
+      display: block;
+    }
+    .anav {
+      display: inline-block;
+      cursor: pointer;
+    }
+    .tr_tview_inactive {
+      background-color: #373737;
+    }
+    .td_tview_all {
+      border: 1px dotted;
+      border-left: 0px;
+      border-right: 0px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      padding: 10px;
+    }
+    .td_tview_all a {
+      word-break: break-all;
+    }
+    /* .tr_tview_pref:hover { outline: 3px dashed #FF0000; } */
+    .td_tview_id { width: 3.5em;  }
+    .td_tview_name { width: 20%; }
+    .td_tview_value { width: 10%; }
+    .td_tview_desc { width: auto; }
+    .td_tview_info { width: 5em; }
+    .td_hide { display: none; }
+
+
+    #tview_buttons_div .controls {
+      padding: 0;
+    }
+    #tview_slider {
+      -webkit-appearance: none;
+      width: calc(100% - 22em);
+      max-width: 75vw;
+      height: 2.2em;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.4;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+      float: left;
+    }
+    #tview_slider:hover { opacity: 1; }
+    #tview_slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 2.1em;
+      height: 2.1em;
+      background: #4CAF50;
+      cursor: pointer;
+    }
+    #tview_slider::-moz-range-thumb {
+      width: 2.1em;
+      height: 2.1em;
+      background: #4CAF50;
+      cursor: pointer;
+    }
+
+
+    /*
+     * icons (for the info column)
+     * using svg from: https://fontawesome.com/search?m=free
+     * svg license: https://fontawesome.com/license/free
+     * https://www.svgbackgrounds.com/how-to-add-svgs-with-css-background-image/
+     * https://stackoverflow.com/questions/29576527/adding-icon-image-to-css-class-for-html-elements
+     * as at 2022-04 using 'filter:' because 'fill:' does not color background svg
+     * convert color to filter: https://codepen.io/sosuke/pen/Pjoqqp
+     */
+
+
+    /* all icons */
+
+
+    .ICON {
+      margin-right: 12px;
+    }
+    .ICON::before {
+      content: '';
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      /* default icon/color */
+      background:url('fontawesome/circle.svg') no-repeat center center / contain;
+      filter: /* White */ brightness(0) saturate(100%) invert(100%);
+    }
+    .ICON:hover::before {
+      box-shadow: 1px 1px White, -1px -1px White;
+      filter: /* White */ brightness(0) saturate(100%) invert(100%);
+    }
+
+
+    /* icons for known tags */
+
+
+    /* before os and notes */
+    .ICON_DEFAULT::before {
+      background:url('fontawesome/helmet-safety.svg') no-repeat center center / contain;
+      filter: /* Yellow */ invert(100%) sepia(98%) saturate(2416%) hue-rotate(1deg) brightness(107%) contrast(101%);
+    }
+    .ICON_FF::before {
+      background:url('fontawesome/firefox-browser.svg') no-repeat center center / contain;
+      filter: /* Orange */ invert(78%) sepia(35%) saturate(6318%) hue-rotate(360deg) brightness(103%) contrast(104%);
+    }
+    .ICON_HIDDEN::before {
+      background:url('fontawesome/eye-slash.svg') no-repeat center center / contain;
+      filter: /* #78c8f0 */ invert(65%) sepia(66%) saturate(300%) hue-rotate(160deg) brightness(103%) contrast(88%);
+    }
+    .ICON_RESTART::before {
+      background:url('fontawesome/power-off.svg') no-repeat center center / contain;
+    }
+    .ICON_SETTING::before {
+      background:url('fontawesome/gear.svg') no-repeat center center / contain;
+      filter: /* Silver */ invert(63%) sepia(91%) saturate(0%) hue-rotate(133deg) brightness(103%) contrast(96%);
+    }
+    .ICON_SETUP::before {
+      background:url('fontawesome/wrench.svg') no-repeat center center / contain;
+      filter: /* Silver */ invert(63%) sepia(91%) saturate(0%) hue-rotate(133deg) brightness(103%) contrast(96%);
+    }
+    .ICON_WARNING::before {
+      background:url('fontawesome/triangle-exclamation.svg') no-repeat center center / contain;
+      filter: /* #ff4f4f */ invert(46%) sepia(22%) saturate(2385%) hue-rotate(321deg) brightness(99%) contrast(104%);
+    }
+
+
+    /* os */
+    .ICON_ANDROID::before {
+      background:url('fontawesome/android.svg') no-repeat center center / contain;
+      filter: /* Lime */ invert(55%) sepia(14%) saturate(7436%) hue-rotate(82deg) brightness(121%) contrast(121%);
+    }
+    .ICON_LINUX::before {
+      background:url('fontawesome/linux.svg') no-repeat center center / contain;
+      filter: /* Lime */ invert(55%) sepia(14%) saturate(7436%) hue-rotate(82deg) brightness(121%) contrast(121%);
+    }
+    .ICON_MAC::before {
+      background:url('fontawesome/apple-whole.svg') no-repeat center center / contain;
+      filter: /* Lime */ invert(55%) sepia(14%) saturate(7436%) hue-rotate(82deg) brightness(121%) contrast(121%);
+    }
+    .ICON_NON-WINDOWS::before {
+      background:url('fontawesome/desktop.svg') no-repeat center center / contain;
+      filter: /* Lime */ invert(55%) sepia(14%) saturate(7436%) hue-rotate(82deg) brightness(121%) contrast(121%);
+    }
+    .ICON_WINDOWS::before {
+      background:url('fontawesome/windows.svg') no-repeat center center / contain;
+      filter: /* Aqua */ invert(87%) sepia(55%) saturate(1191%) hue-rotate(107deg) brightness(105%) contrast(106%);
+    }
+
+
+    /* notes */
+    .ICON_NOTE::before {
+      background:url('fontawesome/clipboard.svg') no-repeat center center / contain;
+      filter: /* Pink */ invert(99%) sepia(96%) saturate(3744%) hue-rotate(285deg) brightness(105%) contrast(111%);
+    }
+    .ICON_STATS::before {
+      background:url('fontawesome/hashtag.svg') no-repeat center center / contain;
+      filter: /* Pink */ invert(99%) sepia(96%) saturate(3744%) hue-rotate(285deg) brightness(105%) contrast(111%);
+    }
+    .ICON_TEST::before {
+      background:url('fontawesome/vial.svg') no-repeat center center / contain;
+      filter: /* Pink */ invert(99%) sepia(96%) saturate(3744%) hue-rotate(285deg) brightness(105%) contrast(111%);
+    }
+    .ICON_TIP::before {
+      background:url('fontawesome/comment.svg') no-repeat center center / contain;
+      filter: /* Pink */ invert(99%) sepia(96%) saturate(3744%) hue-rotate(285deg) brightness(105%) contrast(111%);
+    }
+    .ICON_WHY::before {
+      background:url('fontawesome/question.svg') no-repeat center center / contain;
+      filter: /* Pink */ invert(99%) sepia(96%) saturate(3744%) hue-rotate(285deg) brightness(105%) contrast(111%);
+    }
