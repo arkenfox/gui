@@ -2,7 +2,7 @@
 // Project      : https://github.com/icpantsparti2/firefox-user.js-tool
 // On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
 // License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
-// Version      : 2022.04.07
+// Version      : 2022.04.08
 
     // *************************************
     // various functions for userjsTableView
@@ -323,149 +323,188 @@
 
       // tags (shown under filter button in this order)
       //   these are used on the table row eg: <tr class="TAGS_WARNING "...>
-      //   those below are hardcoded (with an indicator code for the info column)
-      //   any other tags will be detected later (and use a * as indicator code)
+      //   and on the info column eg class: ICON_WARNING etc
+      //   any other tags will be detected later (and use default icon)
       var tags = {
-        // tags to show first
-        'WARNING': {
-          'rx': new RegExp("(\\[WARNING\\]|\\[WARNING.)", "gi"),
-          're': '<span class="warn">$1</span>',
-          'indicator': '<span class="warn">W</span>',
+
+        // before os and notes
+        'DEFAULT': {
+          'option_symbol': '&#9937;',
+          'rx': new RegExp("(\\[DEFAULT[^\\]]*\\])", "gi"),
+          're': "",
+          'iconstatus': "show",
+          'secflag': false,
+          'subflag': false,
+          'titleflag': false,
+          'count': 0
+        },
+        'FF': {
+          'option_symbol': '&#9429;',
+          'option_name': 'FF... (listed below)',
+          'rx': new RegExp("(\\[FF[^\\]]*\\])", "gi"),
+          're': "",
+          'iconstatus': "show",
           'secflag': false,
           'subflag': false,
           'titleflag': false,
           'count': 0
         },
         'HIDDEN': {
+          'option_symbol': '&#128065;',
           'rx': new RegExp("(\\[HIDDEN[^\\]]*\\])", "gi"),
           're': '<span class="hid">$1</span>',
-          'indicator': '<span class="hid">H</span>',
-          'secflag': false,
-          'subflag': false,
-          'titleflag': false,
-          'count': 0
-        },
-        'SETUP': {
-          'option_name': 'SETUP... (listed below)',
-          'rx': new RegExp("(\\[SETUP[^\\]]*\\])", "gi"),
-          're': '<span class="setup">$1</span>',
-          'indicator': '<span class="setup">S</span>',
-          'secflag': false,
-          'subflag': false,
-          'titleflag': false,
-          'count': 0
-        },
-        'DEFAULT': {
-          'rx': new RegExp("(\\[DEFAULT[^\\]]*\\])", "gi"),
-          're': "",
-          'indicator': "D",
-          'secflag': false,
-          'subflag': false,
-          'titleflag': false,
-          'count': 0
-        },
-        // other tags
-        'FF': {
-          'option_name': 'FF... (listed below)',
-          'rx': new RegExp("(\\[FF[^\\]]*\\])", "gi"),
-          're': "",
-          'indicator': "F",
-          'secflag': false,
-          'subflag': false,
-          'titleflag': false,
-          'count': 0
-        },
-        'NOTE': {
-          'rx': new RegExp("(\\[NOTE[^\\]]*\\])", "gi"),
-          're': "",
-          'indicator': "N",
-          'secflag': false,
-          'subflag': false,
-          'titleflag': false,
-          'count': 0
-        },
-        'WHY': {
-          'rx': new RegExp("(\\[WHY[^\\]]*\\])", "gi"),
-          're': "",
-          'indicator': "Y",
+          'iconstatus': 'show',
           'secflag': false,
           'subflag': false,
           'titleflag': false,
           'count': 0
         },
         'RESTART': {
+          'option_symbol': '&#9211;',
           'rx': new RegExp("(\\[RESTART[^\\]]*\\])", "gi"),
           're': "",
-          'indicator': "R",
+          'iconstatus': "show",
           'secflag': false,
           'subflag': false,
           'titleflag': false,
           'count': 0
         },
         'SETTING': {
+          'option_symbol': '&#9881;',
           'rx': new RegExp("(\\[SETTING[^\\]]*\\])", "gi"),
           're': "",
-          'indicator': "X",
+          'iconstatus': "show",
           'secflag': false,
           'subflag': false,
           'titleflag': false,
           'count': 0
         },
-        'TEST': {
-          'rx': new RegExp("(\\[TEST[^\\]]*\\])", "gi"),
-          're': "",
-          'indicator': "T",
+        'SETUP': {
+          'option_symbol': '&#128295;',
+          'option_name': 'SETUP... (listed below)',
+          'rx': new RegExp("(\\[SETUP[^\\]]*\\])", "gi"),
+          're': '<span class="setup">$1</span>',
+          'iconstatus': 'show',
           'secflag': false,
           'subflag': false,
           'titleflag': false,
           'count': 0
         },
-        'TIP': {
-          'rx': new RegExp("(\\[TIP[^\\]]*\\])", "gi"),
-          're': "",
-          'indicator': "I",
+        'WARNING': {
+          'option_symbol': '&#9888;',
+          'rx': new RegExp("(\\[WARNING\\]|\\[WARNING.)", "gi"),
+          're': '<span class="warn">$1</span>',
+          'iconstatus': 'show',
           'secflag': false,
           'subflag': false,
           'titleflag': false,
           'count': 0
         },
+
         // os
-        'WINDOWS': {
-          'rx': new RegExp("(\\[WINDOWS[^\\]]*\\])", "gi"),
+        'ANDROID': {
+          'option_symbol': '&#128187;',
+          'rx': new RegExp("(\\[ANDROID[^\\]]*\\])", "gi"),
           're': "",
-          'indicator': "M",
-          'secflag': false,
-          'subflag': false,
-          'titleflag': false,
-          'count': 0
-        },
-        'NON-WINDOWS': {
-          'rx': new RegExp("(\\[NON-WINDOWS[^\\]]*\\])", "gi"),
-          're': "",
-          'indicator': "O",
-          'secflag': false,
-          'subflag': false,
-          'titleflag': false,
-          'count': 0
-        },
-        'MAC': {
-          'rx': new RegExp("(\\[MAC[^\\]]*\\])", "gi"),
-          're': "",
-          'indicator': "A",
+          'iconstatus': "show",
           'secflag': false,
           'subflag': false,
           'titleflag': false,
           'count': 0
         },
         'LINUX': {
+          'option_symbol': '&#128187;',
           'rx': new RegExp("(\\[LINUX[^\\]]*\\])", "gi"),
           're': "",
-          'indicator': "L",
+          'iconstatus': "show",
+          'secflag': false,
+          'subflag': false,
+          'titleflag': false,
+          'count': 0
+        },
+        'MAC': {
+          'option_symbol': '&#128187;',
+          'rx': new RegExp("(\\[MAC[^\\]]*\\])", "gi"),
+          're': "",
+          'iconstatus': "show",
+          'secflag': false,
+          'subflag': false,
+          'titleflag': false,
+          'count': 0
+        },
+        'NON-WINDOWS': {
+          'option_symbol': '&#128187;',
+          'rx': new RegExp("(\\[NON-WINDOWS[^\\]]*\\])", "gi"),
+          're': "",
+          'iconstatus': "show",
+          'secflag': false,
+          'subflag': false,
+          'titleflag': false,
+          'count': 0
+        },
+        'WINDOWS': {
+          'option_symbol': '&#128187;',
+          'rx': new RegExp("(\\[WINDOWS[^\\]]*\\])", "gi"),
+          're': "",
+          'iconstatus': "show",
+          'secflag': false,
+          'subflag': false,
+          'titleflag': false,
+          'count': 0
+        },
+
+        // notes
+        'NOTE': {
+          'option_symbol': '&#128466;',
+          'rx': new RegExp("(\\[NOTE[^\\]]*\\])", "gi"),
+          're': "",
+          'iconstatus': "show",
+          'secflag': false,
+          'subflag': false,
+          'titleflag': false,
+          'count': 0
+        },
+        'STATS': {
+          'option_symbol': '&#128466;',
+          'rx': new RegExp("(\\[STATS[^\\]]*\\])", "gi"),
+          're': "",
+          'iconstatus': "show",
+          'secflag': false,
+          'subflag': false,
+          'titleflag': false,
+          'count': 0
+        },
+        'TEST': {
+          'option_symbol': '&#128466;',
+          'rx': new RegExp("(\\[TEST[^\\]]*\\])", "gi"),
+          're': "",
+          'iconstatus': "show",
+          'secflag': false,
+          'subflag': false,
+          'titleflag': false,
+          'count': 0
+        },
+        'TIP': {
+          'option_symbol': '&#128466;',
+          'rx': new RegExp("(\\[TIP[^\\]]*\\])", "gi"),
+          're': "",
+          'iconstatus': "show",
+          'secflag': false,
+          'subflag': false,
+          'titleflag': false,
+          'count': 0
+        },
+        'WHY': {
+          'option_symbol': '&#128466;',
+          'rx': new RegExp("(\\[WHY[^\\]]*\\])", "gi"),
+          're': "",
+          'iconstatus': "show",
           'secflag': false,
           'subflag': false,
           'titleflag': false,
           'count': 0
         }
+
       }
 
       // check for "[TAGS]" not hardcoded above
@@ -530,17 +569,23 @@
         var iv = extraTags[i].replace(/[\[\]]/g, "");
         var iv_encoded = encodeURIComponent(iv);
         tags[iv_encoded] = {
+          'option_symbol': '&#x25CF;',
           'rx': new RegExp("(\\[" + RegExp.escape(iv) + "\\])", "gi"),
           're': "",
-          'indicator': "*",
+          'iconstatus': "default",
           'secflag': false,
           'subflag': false,
           'titleflag': false,
           'count': 0
         }
-        if (new RegExp("^(SETUP|FF).+").test(iv)) {
-          // remove the * indicator as these TAGS are in a group too
-          tags[iv_encoded].indicator = "";
+        // these TAGS are in a group (so already have an icon shown)
+        if (new RegExp("^(SETUP).+").test(iv)) {
+          tags[iv_encoded].option_symbol = tags["SETUP"].option_symbol;
+          tags[iv_encoded].iconstatus = "";
+        }
+        if (new RegExp("^(FF).+").test(iv)) {
+          tags[iv_encoded].option_symbol = tags["FF"].option_symbol;
+          tags[iv_encoded].iconstatus = "";
         }
       }
 
@@ -697,9 +742,10 @@
                   || (tags[i].titleflag)
                   || (tags[i].rx.test(prefArray[last_index].comment))
                 ) {
-                  if (tags[i].indicator) {
+                  if (tags[i].iconstatus) {
                     prefArray[last_index].info += '<abbr title="'
-                      + i + '">' + tags[i].indicator + '</abbr> ';
+                      + i + '" class="ICON ICON_' + i
+                      + '">' + '</abbr> ';
                   }
                   prefArray[last_index].tagclass += "TAGS_" + i + " ";
                   tags[i].count++;
@@ -865,7 +911,7 @@
             + "<br>";
         }
 
-        // update info (tag indicators)
+        // update info (icon for tag)
         switch (linetype) {
           case "section":
           case "section+":
@@ -873,9 +919,9 @@
             for (var i in tags) {
               tags[i].rx.lastIndex = 0;
               if (tags[i].secflag) {
-                if (tags[i].indicator) {
+                if (tags[i].iconstatus) {
                   prefArray[last_index].info += '<abbr title="'
-                    + i + '">' + tags[i].indicator + '</abbr> ';
+                    + i + '" class="ICON ICON_' + i + '">' + '</abbr> ';
                 }
               }
             }
@@ -886,9 +932,9 @@
             for (var i in tags) {
               tags[i].rx.lastIndex = 0;
               if (tags[i].subflag) {
-                if (tags[i].indicator) {
+                if (tags[i].iconstatus) {
                   prefArray[last_index].info += '<abbr title="'
-                    + i + '">' + tags[i].indicator + '</abbr> ';
+                    + i + '" class="ICON ICON_' + i + '">' + '</abbr> ';
                 }
               }
             }
@@ -1004,9 +1050,9 @@
               || (tags[i].titleflag)
               || (tags[i].rx.test(prefArray[last_index].comment))
             ) {
-              if (tags[i].indicator) {
+              if (tags[i].iconstatus) {
                 prefArray[last_index].info += '<abbr title="'
-                  + i + '">' + tags[i].indicator + '</abbr> ';
+                  + i + '" class="ICON ICON_' + i + '">' + '</abbr> ';
               }
               prefArray[last_index].tagclass += "TAGS_" + i + " ";
               tags[i].count++;
@@ -1042,9 +1088,9 @@
               .test(prefArray[last_index].tagclass);
             tags[i].rx.lastIndex = 0;
             if ( (alreadyintagclass) || (tags[i].rx.test(prefCommentPlus)) ) {
-              if (tags[i].indicator) {
+              if (tags[i].iconstatus) {
                 prefArray[last_index].info += '<abbr title="'
-                  + i + '">' + tags[i].indicator + '</abbr> ';
+                  + i + '" class="ICON ICON_' + i + '">' + '</abbr> ';
               }
               if (!alreadyintagclass) {
                 prefArray[last_index].tagclass += tagclasstext;
@@ -1178,17 +1224,15 @@
         + 'Inactive'
         + '&#x00A0;&#x00A0;&#x00A0;&#x00A0;(' + stats["totali"].count + ')</option>';
 
-      // add tags to filter select (and show indicator/key plus counts)
+      // add tags to filter select (and show counts)
       for (var i in tags) {
         if (tags[i].count > 0) {
           content_html += '  <option value="' + "TAGS_" + i
-            + '">&#x25A2;&#x00A0;&#x00A0;';
-          if (tags[i].indicator) {
-            content_html += tags[i].indicator
-              + '&#x00A0;&#x00A0;-&#x00A0;&#x00A0;';
-          }
-          content_html +=
-            ((tags[i].option_name) ? tags[i].option_name : decodeURIComponent(i))
+            + '">&#x25A2;&#x00A0;&#x00A0;'
+            + ((tags[i].option_symbol) ? tags[i].option_symbol
+              : '&#x00A0;&#x00A0;&#x00A0;&#x00A0;')
+            + '&#x00A0;&#x00A0;'
+            + ((tags[i].option_name) ? tags[i].option_name : decodeURIComponent(i))
             + '&#x00A0;&#x00A0;&#x00A0;&#x00A0;('
             + tags[i].count + ')</option>';
         }
