@@ -2,7 +2,7 @@
 // Project      : https://github.com/icpantsparti2/firefox-user.js-tool
 // On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
 // License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
-// Version      : 2022.04.07.2
+// Version      : 2022.04.08
 
     ////////////////////////////////////////
     // userjsTableViewWhenArkenfoxRepoMode
@@ -76,6 +76,10 @@
         userjsTableViewTagFilter(null,this.value);
       });
 
+      document.getElementById("tview_search_clear_button").style.borderTop = "0px";
+      document.getElementById("tview_search_clear_button").style.borderRight = "0px";
+      document.getElementById("tview_search_clear_button").style.borderBottom = "0px";
+      
       // search clear button
       document.getElementById("tview_search_clear_button").addEventListener("click", function() {
         if (!(document.getElementById("tview_search_input").value=="")) {
@@ -104,6 +108,7 @@
       e.style.height="4em";
       e.style.maxWidth = "1400px";
       e.style.margin = "0 auto";
+      e.style.zIndex = "100";
 
       // max/min width
       document.body.style.maxWidth = "1400px";
