@@ -3,7 +3,7 @@
    Project      : https://github.com/icpantsparti2/firefox-user.js-tool
    On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
    License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
-   Version      : 2022.04.07
+   Version      : 2022.04.08
 */
 
     /* main blocks */
@@ -246,52 +246,6 @@
     .td_comp_diff { border: solid 3px; }
     /* #table_comp tr:hover { outline: 3px dashed #FF0000; } */
 
-    /* tableview */
-    #table_tview {
-      table-layout: fixed;
-      width: 100%;
-      border-spacing: 1px;
-      white-space: normal;
-      border-collapse: collapse;
-    }
-    .tr_tview_heading {
-      border: solid 3px;
-      white-space: pre;
-      border-left: 0px;
-      border-right: 0px;
-    }
-    /* https://css-tricks.com/hash-tag-links-padding/ */
-    .anchor {
-      margin-top: -165px;
-      padding-bottom: 165px;
-      display: block;
-    }
-    .anav {
-      display: inline-block;
-      cursor: pointer;
-    }
-    .tr_tview_inactive {
-      background-color: #373737;
-    }
-    .td_tview_all {
-      border: 1px dotted;
-      border-left: 0px;
-      border-right: 0px;
-      vertical-align: top;
-      overflow-wrap: anywhere;
-      padding: 10px;
-    }
-    .td_tview_all a {
-      word-break: break-all;
-    }
-    /* .tr_tview_pref:hover { outline: 3px dashed #FF0000; } */
-    .td_tview_id { width: 3.5em;  }
-    .td_tview_name { width: 20%; }
-    .td_tview_value { width: 10%; }
-    .td_tview_desc { width: auto; }
-    .td_tview_info { width: 5em; }
-    .td_hide { display: none; }
-
 
     /* buttons bar and navigation (on compare and tableview) */
     /* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
@@ -310,37 +264,6 @@
       padding: 0 0.2em 0 0.2em;
       min-width: 4em;
     }
-    #tview_buttons_div .controls {
-      padding: 0;
-    }
-    #tview_slider {
-      -webkit-appearance: none;
-      width: calc(100% - 22em);
-      max-width: 75vw;
-      height: 2.2em;
-      background: #d3d3d3;
-      outline: none;
-      opacity: 0.4;
-      -webkit-transition: .2s;
-      transition: opacity .2s;
-      float: left;
-    }
-    #tview_slider:hover { opacity: 1; }
-    #tview_slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 2.1em;
-      height: 2.1em;
-      background: #4CAF50;
-      cursor: pointer;
-    }
-    #tview_slider::-moz-range-thumb {
-      width: 2.1em;
-      height: 2.1em;
-      background: #4CAF50;
-      cursor: pointer;
-    }
-
 
     /* within view area */
     #collect_mode_pad { display: none; white-space: normal; }
