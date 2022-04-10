@@ -2,7 +2,7 @@
 // Project      : https://github.com/icpantsparti2/firefox-user.js-tool
 // On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
 // License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
-// Version      : 2022.04.08
+// Version      : 2022.04.09
 
     // *************************************
     // various functions for userjsTableView
@@ -328,6 +328,27 @@
       var tags = {
 
         // before os and notes
+        'WARNING': {
+          'option_symbol': '&#9888;',
+          'rx': new RegExp("(\\[WARNING\\]|\\[WARNING.)", "gi"),
+          're': '<span class="warn">$1</span>',
+          'iconstatus': 'show',
+          'secflag': false,
+          'subflag': false,
+          'titleflag': false,
+          'count': 0
+        },
+        'SETUP': {
+          'option_symbol': '&#128295;',
+          'option_name': 'SETUP... (listed below)',
+          'rx': new RegExp("(\\[SETUP[^\\]]*\\])", "gi"),
+          're': '<span class="setup">$1</span>',
+          'iconstatus': 'show',
+          'secflag': false,
+          'subflag': false,
+          'titleflag': false,
+          'count': 0
+        },
         'DEFAULT': {
           'option_symbol': '&#9937;',
           'rx': new RegExp("(\\[DEFAULT[^\\]]*\\])", "gi"),
@@ -374,27 +395,6 @@
           'rx': new RegExp("(\\[SETTING[^\\]]*\\])", "gi"),
           're': "",
           'iconstatus': "show",
-          'secflag': false,
-          'subflag': false,
-          'titleflag': false,
-          'count': 0
-        },
-        'SETUP': {
-          'option_symbol': '&#128295;',
-          'option_name': 'SETUP... (listed below)',
-          'rx': new RegExp("(\\[SETUP[^\\]]*\\])", "gi"),
-          're': '<span class="setup">$1</span>',
-          'iconstatus': 'show',
-          'secflag': false,
-          'subflag': false,
-          'titleflag': false,
-          'count': 0
-        },
-        'WARNING': {
-          'option_symbol': '&#9888;',
-          'rx': new RegExp("(\\[WARNING\\]|\\[WARNING.)", "gi"),
-          're': '<span class="warn">$1</span>',
-          'iconstatus': 'show',
           'secflag': false,
           'subflag': false,
           'titleflag': false,
