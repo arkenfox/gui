@@ -3,7 +3,7 @@
    Project      : https://github.com/icpantsparti2/firefox-user.js-tool
    On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
    License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
-   Version      : 2022.04.06
+   Version      : 2022.04.09
 */
 
     /* ************************************* */
@@ -154,11 +154,11 @@
     .view_area_arkenfox .pref                    { color: #ffffff; } /* section header */
     .body_arkenfox a                             { color: #b3b3b3; } /* prefname */
     .view_area_arkenfox .false                   { color: #f07878; }
-    .view_area_arkenfox .true                    { color: #78f0c8; }
-    .view_area_arkenfox .integer                 { color: #c8f078; }
+    .view_area_arkenfox .true                    { color: #78f078; }
+    .view_area_arkenfox .integer                 { color: #f0f078; }
     .view_area_arkenfox .string                  { color: #a078f0; }
     .view_area_arkenfox .http                    { color: #78a0f0; } /* a http */
     .view_area_arkenfox .warn         { background-color: #ff4f4f;
                                                color: #FFFFFF; }
-    .view_area_arkenfox .hid                     { color: #78c8f0; }
-    .view_area_arkenfox .ref                     { color: #78f078; } /* id+desc */
+    .view_area_arkenfox .hid                     { color: #b3b3b3; }
+    .view_area_arkenfox .ref                     { color: #f0c878; } /* id+desc */
