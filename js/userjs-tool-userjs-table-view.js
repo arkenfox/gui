@@ -2,7 +2,11 @@
 // Project      : https://github.com/icpantsparti2/firefox-user.js-tool
 // On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
 // License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
-// Version      : 2022.04.09
+// Version      : 2022.09.11 (minor tweaks of v2022.04.09)
+
+// TODO: code improvements:
+// TODO: https://github.com/arkenfox/gui/issues/2#issuecomment-1159625494
+// TODO: https://github.com/arkenfox/gui/issues/2#issuecomment-1159626088
 
     // *************************************
     // various functions for userjsTableView
@@ -608,7 +612,7 @@
             new RegExp("(https?:[/][/][^ \"']+[^\\)\\], \"'.;])", "gi"),
           're':
             '<a target="_blank" rel="external noopener noreferrer" '
-            + 'href="$1" class="http"><span class="hidden">__</span>$1</A>'
+            + 'href="$1" class="http">$1</A>'
         }
       }
 
@@ -660,7 +664,7 @@
           linetype = "section";
           lastSection++;
         }
-        else if ( (new RegExp("^\/\/ /[*/]+ +(START|END|[0-9][^:]+):").test(line))
+        else if ( (new RegExp("^\/\/ */[*/]+ +(START|END|[0-9][^:]+):").test(line))
           || (new RegExp("^//[ *\t]*PREF:").test(line))
         ) {
           // line starting  /*... or //...  followed by  START: END: 1234: 1234a:
@@ -826,12 +830,12 @@
         if (linetype == "section" || linetype == "title") {
           if (
             (new RegExp("^(?:\/\/ )/[*/]+[ \\t]+\\[SECTION ([^\\]]+)\\]:.*$").test(line))
-            || (new RegExp("^(?:\/\/ )/[*/]+[ \\t]+([^:]+):.*$").test(line))
+            || (new RegExp("^(?:\/\/ *)/[*/]+[ \\t]+([^:]+):.*$").test(line))
           ) {
             prefid = line;
             x = new RegExp("^(?:\/\/ )/[*/]+[ \\t]+\\[SECTION ([^\\]]+)\\]:.*$");
             prefid = prefid.replace(x, "$1");
-            x = new RegExp("^(?:\/\/ )/[*/]+[ \\t]+([^:]+):.*$");
+            x = new RegExp("^(?:\/\/ *)/[*/]+[ \\t]+([^:]+):.*$");
             prefid = prefid.replace(x, "$1");
             if (/^9999/.test(prefid)) {
               prefid_prefix = '9999:';
@@ -921,7 +925,7 @@
               if (tags[i].secflag) {
                 if (tags[i].iconstatus) {
                   prefArray[last_index].info += '<abbr title="'
-                    + i + '" class="ICON ICON_' + i + '">' + '</abbr> ';
+                    + i + '" class="ICON ICON_' + i + '">' + '</abbr>';
                 }
               }
             }
@@ -934,7 +938,7 @@
               if (tags[i].subflag) {
                 if (tags[i].iconstatus) {
                   prefArray[last_index].info += '<abbr title="'
-                    + i + '" class="ICON ICON_' + i + '">' + '</abbr> ';
+                    + i + '" class="ICON ICON_' + i + '">' + '</abbr>';
                 }
               }
             }
@@ -951,7 +955,7 @@
         // title (first line)
         if (linetype == "title") {
           prefTitle = line;
-          x = new RegExp("^(?:\/\/ )/[*/]+ +[^:]+:[ \t]*(.*)[ \t]*$");
+          x = new RegExp("^(?:\/\/ *)/[*/]+ +[^:]+:[ \t]*(.*)[ \t]*$");
           prefTitle = prefTitle.replace(x, "$1")
             .replace(/^(\/\/ |   \/\/ |      \/\/ | \* |\* )/, "");
           x = new RegExp("[ \\t]*\\*+/[ \\t]*$");
@@ -968,6 +972,8 @@
         }
 
         // title+
+        // TODO look into concat of pref desc:
+        // TODO https://github.com/arkenfox/gui/issues/5
         if (linetype == "title+") {
           prefDesc += line.replace(/^\/\/ /, "");
             //.replace(/^(\/\/ |   \/\/ |      \/\/ | \* |\* )/, "");
@@ -1052,7 +1058,7 @@
             ) {
               if (tags[i].iconstatus) {
                 prefArray[last_index].info += '<abbr title="'
-                  + i + '" class="ICON ICON_' + i + '">' + '</abbr> ';
+                  + i + '" class="ICON ICON_' + i + '">' + '</abbr>';
               }
               prefArray[last_index].tagclass += "TAGS_" + i + " ";
               tags[i].count++;
@@ -1090,7 +1096,7 @@
             if ( (alreadyintagclass) || (tags[i].rx.test(prefCommentPlus)) ) {
               if (tags[i].iconstatus) {
                 prefArray[last_index].info += '<abbr title="'
-                  + i + '" class="ICON ICON_' + i + '">' + '</abbr> ';
+                  + i + '" class="ICON ICON_' + i + '">' + '</abbr>';
               }
               if (!alreadyintagclass) {
                 prefArray[last_index].tagclass += tagclasstext;
