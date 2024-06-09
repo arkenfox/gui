@@ -2,7 +2,7 @@
 // Project      : https://github.com/icpantsparti2/firefox-user.js-tool
 // On-line      : https://icpantsparti2.github.io/firefox-user.js-tool/userjs-tool.html
 // License (MIT): https://raw.githubusercontent.com/icpantsparti2/firefox-user.js-tool/master/LICENSE
-// Version      : 2022.04.08
+// Version      : 2024.06.09
 
     ////////////////////////////////////////
     // userjsTableViewWhenArkenfoxRepoMode
@@ -202,10 +202,18 @@
 
       if ( (txtbx.value=="")
         || (/^\?(a|b)($|&)/.test(location.search))
+        || (/^(\?|.*&)v=[^&]+($|&)/.test(location.search))
       ) {
         // fetch file from main repo instead
         txtbx.value="";
         var url="https://raw.githubusercontent.com/arkenfox/user.js/master/user.js";
+        if (/^(\?|.*&)v=[^&]+($|&)/.test(location.search)) {
+          // eg "?v=115.1", then in url replace "/master/" with "/115.1/"
+          // https://github.com/arkenfox/user.js/tags
+          // eg https://github.com/arkenfox/user.js/tree/115.1
+          url=url.replace(/\/master\//,`/${
+            location.search.replace(/^(\?|.*&)v=([^&]+)($|&.*$)/,"$2")}/`);
+        }
         var msg = "\nTroubleshooting:  Check connection?"
           + "  Blocked by an extension (eg uMatrix XHR)?"
           + "  Site allows fetch?  Valid URL/file?\n"
